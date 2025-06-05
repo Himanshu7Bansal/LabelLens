@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.h7b.labelLens.R
 import dev.h7b.labelLens.ui.components.ButtonPrimary
+import dev.h7b.labelLens.ui.components.Image
 import dev.h7b.labelLens.ui.theme.HorizontalPadding
 import dev.h7b.labelLens.ui.theme.VerticalPadding
 
@@ -35,7 +36,7 @@ fun BoxScope.ObjectIdentifierScreen(
         Spacer(modifier = Modifier.height(24.dp))
         Text(text = stringResource(R.string.original_image))
         Spacer(modifier = Modifier.height(12.dp))
-        //Image
+        Image(uri = uri)
         Spacer(modifier = Modifier.height(24.dp))
         Text(text = stringResource(R.string.object_detection_image))
         Spacer(modifier = Modifier.height(12.dp))

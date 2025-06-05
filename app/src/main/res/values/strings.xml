@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LabelLens</string>
+    <string name="open_photos">Open photos</string>
+    <string name="go_to_main">Go to main</string>
+    <string name="original_image">Original image</string>
+    <string name="object_detection_image">Object detection image</string>
+    <string name="error_selecting_image">Error selecting image</string>
 </resources>

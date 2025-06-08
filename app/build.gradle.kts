@@ -7,6 +7,7 @@ plugins {
 android {
     namespace = "dev.h7b.labelLens"
     compileSdk = 35
+    androidResources.noCompress.add("tflite")
 
     defaultConfig {
         applicationId = "dev.h7b.labelLens"

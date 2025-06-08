@@ -10,22 +10,31 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
-import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions
+import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 
 class MainViewModel : ViewModel() {
 
     var bitmap by mutableStateOf<Bitmap?>(null)
     val detectedObjectBoxes = mutableStateListOf<DetectedObjectBox>()
-    private val options by lazy {
-        ObjectDetectorOptions.Builder()
-            .setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE)
-            .enableClassification()
-            .enableMultipleObjects()
+    private val localModel by lazy {
+        LocalModel.Builder()
+            .setAssetFilePath("models/mobile_object_labeler_V1.tflite")
             .build()
     }
-    private val objectDetector by lazy { ObjectDetection.getClient(options) }
+    private val customObjectDetectorOptions by lazy {
+        CustomObjectDetectorOptions.Builder(localModel)
+            .setDetectorMode(CustomObjectDetectorOptions.SINGLE_IMAGE_MODE)
+            .enableMultipleObjects()
+            .enableClassification()
+            //.setClassificationConfidenceThreshold(0.5f)
+            .build()
+    }
+    private val objectDetector by lazy {
+        ObjectDetection.getClient(customObjectDetectorOptions)
+    }
 
     fun detectObjectsFromImageUri(
         context: Context,

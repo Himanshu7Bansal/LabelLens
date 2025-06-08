@@ -5,4 +5,5 @@
     <string name="original_image">Original image</string>
     <string name="object_detection_image">Object detection image</string>
     <string name="error_selecting_image">Error selecting image</string>
+    <string name="error_detecting_object">Error detecting object</string>
 </resources>

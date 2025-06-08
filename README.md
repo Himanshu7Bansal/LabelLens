@@ -47,7 +47,7 @@ real-time bounding box visualization.
 // ML Kit Object Detection
 dependencies {
   // ...
-  implementation("com.google.mlkit:object-detection:17.0.2")
+  implementation("com.google.mlkit:object-detection-custom:17.0.2")
 }
 ```
 
@@ -72,12 +72,20 @@ app/src/main/java/dev/h7b/labelLens/
 ### **Object Detection Setup**
 
 ```kotlin
-private val options by lazy {
-    ObjectDetectorOptions.Builder()
-        .setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE)
-        .enableClassification()
-        .enableMultipleObjects()
-        .build()
+private val localModel by lazy {
+   LocalModel.Builder()
+      .setAssetFilePath("models/mobile_object_labeler_V1.tflite")
+      .build()
+}
+private val customObjectDetectorOptions by lazy {
+   CustomObjectDetectorOptions.Builder(localModel)
+      .setDetectorMode(CustomObjectDetectorOptions.SINGLE_IMAGE_MODE)
+      .enableMultipleObjects()
+      .enableClassification()
+      .build()
+}
+private val objectDetector by lazy {
+   ObjectDetection.getClient(customObjectDetectorOptions)
 }
 ```
 
